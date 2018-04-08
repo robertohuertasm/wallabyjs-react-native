@@ -1,8 +1,14 @@
 module.exports = function(wallaby) {
   return {
-    files: ['src/**/*.ts', 'src/tests/setup.js', 'package.json', '!src/**/*.spec.ts', '!src/**/*.spec.tsx'],
+    files: [
+      'src/**/*.ts',
+      'test-setup.js',
+      'package.json',
+      '!src/**/*.spec.ts',
+      '!src/**/*.spec.tsx'
+    ],
 
-    tests: ['src/**/*.spec.ts'],
+    tests: ['src/**/*.spec.ts', 'src/**/*.spec.tsx'],
 
     env: {
       type: 'node',
@@ -14,12 +20,16 @@ module.exports = function(wallaby) {
     compilers: {
       '**/*.js': wallaby.compilers.babel({
         presets: ['react-native'],
-        plugins: ['transform-flow-strip-types', 'transform-object-rest-spread', 'transform-async-to-generator']
+        plugins: [
+          'transform-flow-strip-types',
+          'transform-object-rest-spread',
+          'transform-async-to-generator'
+        ]
       })
     },
 
     setup: wallaby => {
-      wallaby.testFramework.configure(require('./package.json').jest)
+      wallaby.testFramework.configure(require('./package.json').jest);
     }
-  }
-}
+  };
+};
