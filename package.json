@@ -1,0 +1,54 @@
+{
+  "name": "wrn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "tsc": "tsc -p ./tsconfig.json",
+    "clean:build": "rimraf build",
+    "build": "npm run clean:build && npm run tsc",
+    "build:watch": "npm run build -- -- -w",
+    "pretty": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "precommit": "pretty-quick --staged",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.3.1",
+    "react-native": "0.55.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.2",
+    "@types/react": "^16.3.5",
+    "@types/react-native": "^0.52.24",
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "22.4.3",
+    "prettier": "^1.11.1",
+    "pretty-quick": "^1.4.1",
+    "react-test-renderer": "16.3.1",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^22.4.2",
+    "typescript": "^2.8.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/",
+      "<rootDir>/lib/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  }
+}
