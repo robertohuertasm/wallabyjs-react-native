@@ -1,7 +1,7 @@
 module.exports = function(wallaby) {
   return {
     files: [
-      'src/**/*.ts',
+      'src/**/*.ts?(x)',
       'test-setup.js',
       'package.json',
       '!src/**/*.spec.ts',
@@ -18,18 +18,15 @@ module.exports = function(wallaby) {
     testFramework: 'jest',
 
     compilers: {
-      '**/*.js': wallaby.compilers.babel({
-        presets: ['react-native'],
-        plugins: [
-          'transform-flow-strip-types',
-          'transform-object-rest-spread',
-          'transform-async-to-generator'
-        ]
-      })
+      '**/*.ts?(x)': wallaby.compilers.typeScript({ target: 'es5' })
     },
 
-    setup: wallaby => {
-      wallaby.testFramework.configure(require('./package.json').jest);
+    preprocessors: {
+      '**/*.js?(x)': file => require('@babel/core').transform(
+        file.content,
+        {
+          sourceMap: true, compact: false, filename: file.path, babelrc: true
+        })
     }
   };
 };
