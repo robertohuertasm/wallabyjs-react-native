@@ -27,6 +27,12 @@ module.exports = function(wallaby) {
         {
           sourceMap: true, compact: false, filename: file.path, babelrc: true
         })
+    },
+
+    setup: wallaby => {
+      const jestConfig = require('./package.json').jest;
+      jestConfig.testEnvironment = 'jsdom';
+      wallaby.testFramework.configure(jestConfig);
     }
   };
 };
